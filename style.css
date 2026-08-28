@@ -1,0 +1,15 @@
+body {
+    min-height: 100vh;
+}
+
+.card {
+    border-radius: 0.75rem;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+footer {
+    border-top: 1px solid #dee2e6;
+}
