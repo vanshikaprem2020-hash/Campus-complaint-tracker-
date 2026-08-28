@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Submit Complaint - Campus Complaint Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Submit a New Complaint</h4>
+                <form method="POST" action="{{ url_for('submit_complaint') }}">
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title *</label>
+                        <input type="text" class="form-control" id="title" name="title" required
+                               value="{{ form_data.get('title', '') }}"
+                               placeholder="e.g. Water leakage in Room 204">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description *</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required
+                                  placeholder="Describe the issue in detail...">{{ form_data.get('description', '') }}</textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category">
+                                {% for c in categories %}
+                                    <option value="{{ c }}">{{ c }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select class="form-select" id="priority" name="priority">
+                                {% for p in priorities %}
+                                    <option value="{{ p }}" {% if p == 'Medium' %}selected{% endif %}>{{ p }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location (optional)</label>
+                        <input type="text" class="form-control" id="location" name="location"
+                               value="{{ form_data.get('location', '') }}"
+                               placeholder="e.g. Hostel Block B, Room 12">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="submitted_by" class="form-label">Your Name (optional — leave blank for anonymous)</label>
+                        <input type="text" class="form-control" id="submitted_by" name="submitted_by"
+                               value="{{ form_data.get('submitted_by', '') }}"
+                               placeholder="e.g. Rahul S.">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
